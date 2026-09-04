@@ -40,12 +40,16 @@ The script works with a directory structure that has a directory called 'data'. 
 The script can be deployed to be run on a SLURM cluster, or other GPU cluster, using a docker container. A Dockerfile and requirements file are provided in this repository for creating a docker image. Alternatively, a ready-made docker image is available here: https://hub.docker.com/repository/docker/tobygill95/gather_gbif_sentinel_data/general. 
 Using this image will also prevent issues arising from package version conflicts. 
 
+Below is a visual heatmap of the resulting dataset, with the colour denoting the number of species present in each tile. 
+
 ![alt text](./image-4.png)
 
 # Data exploration.ipynb
 In order to run, this notebook must be in the same working directory as the biodiversity data csv file outputted by the previous script (called 'GBIF_data_output final.csv' in this repository). Additionally, the kml file for the MGRS tile boundaries, mentioned in the previous section, will need to be in the same working directory, with the same file name as mentioned above. 
 
 The notebook doesn't save any outputs as files - all the necessary visualisations are shown in results on screen. 
+
+Below are charts showing the correlations between different candidate biodiversity metrics and the number of recorded GBIF occurrences in the tile - a potential sign of sample bias in the data. 
 
 ![alt text](./image-1.png)
 
@@ -66,6 +70,8 @@ The script is designed so that the model can be trained on any number of the pot
 
 There is no docker image for this script, so ensure that whatever environment is used to run the script has keras and tensorflow installed. 
 
+Below is a chart showing the model training loss per epoch.
+
 ![alt text](./image-2.png)
 
 # Build_Simple_CNN_MLP_model.py
@@ -82,11 +88,14 @@ The notebook is constructed so that running all the cells will run one forward p
 
 This notebook is intended to be run locally. Issues with tensorflow's Time Distributed function poorly utilising the local CPU meant that the model has to be manually run over the 500 image patches using a for loop. 
 
+Below are an example of a full Sentinel-2 tile, and the patches of this image that the model identified as most relevant to predicting the tile's biodiversity. 
+
+![alt text](./T32TNR.jpg)
+
+![alt text](./image.png)
+
 ![alt text](./image-3.png)
 
-
-
-
-
+![alt text](./image-5.png)
 
 
